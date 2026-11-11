@@ -143,6 +143,38 @@ FOR (n:Entity) ON EACH [n.name, n.description];
 // `vector.similarity_function`: 'cosine'}};
 """
 
+    def data_cypher(self) -> str:
+        """Exporta o grafo local para nós e relações compatíveis com Neo4j."""
+        lines = ["// Dados extraídos pelo pipeline Text-to-Graph"]
+        for node in sorted(self.nodes.values(), key=lambda item: item.identifier):
+            lines.append(
+                "MERGE (n:%s {id: %s}) SET n.name = %s, n.source = %s;"
+                % (
+                    node.label,
+                    self._cypher_string(node.identifier),
+                    self._cypher_string(node.name),
+                    self._cypher_string(node.source),
+                )
+            )
+        for relationship in sorted(
+            self.relationships, key=lambda item: (item.source, item.relation, item.target)
+        ):
+            lines.append(
+                "MATCH (source {id: %s}), (target {id: %s}) "
+                "MERGE (source)-[:%s {source_document: %s}]->(target);"
+                % (
+                    self._cypher_string(relationship.source),
+                    self._cypher_string(relationship.target),
+                    relationship.relation,
+                    self._cypher_string(relationship.source_document),
+                )
+            )
+        return "\n".join(lines) + "\n"
+
+    @staticmethod
+    def _cypher_string(value: str) -> str:
+        return "'" + value.replace("\\", "\\\\").replace("'", "\\'") + "'"
+
 
 class TextToGraph:
     """Extrator determinístico de entidades e relações para a demonstração."""
@@ -283,11 +315,19 @@ def main() -> None:
         parser.error("--hops deve ser no mínimo 2 para atender ao multi-hop.")
     documents = demo_documents() if args.demo or not args.file else load_documents(args.file)
     graph = TextToGraph().build(documents)
-    if args.cypher:
-        args.cypher.write_text(graph.schema_cypher(), encoding="utf-8")
-        print(f"Schema Neo4j salvo em: {args.cypher}")
     question = args.question or input("Pergunta: ")
     result = HybridRetriever(documents, graph).search(question, hops=args.hops)
+    if args.cypher:
+        export = (
+            graph.schema_cypher()
+            + "\n"
+            + graph.data_cypher()
+            + "\n// Consulta de contexto gerada para esta pergunta\n"
+            + result.cypher
+            + "\n"
+        )
+        args.cypher.write_text(export, encoding="utf-8")
+        print(f"Schema, dados e consulta Neo4j salvos em: {args.cypher}")
     print(f"\n{result.answer}\nConfiança: {result.confidence:.2f}")
     print(f"Documentos: {', '.join(result.documents) or 'nenhum'}")
     print(f"Nós consultados: {len(result.nodes)}")

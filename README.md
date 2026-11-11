@@ -25,6 +25,13 @@ formato `[{"id": "doc1", "text": "..."}]`:
 python "PROJETO RICARDO.py" --file .\documentos --cypher .\schema.cypher "O que KAG utiliza?"
 ```
 
+O arquivo indicado em `--cypher` inclui o schema, os nós e relacionamentos
+extraídos e a consulta de contexto da pergunta. Para executar os testes:
+
+```powershell
+python -m unittest -v
+```
+
 O extrator é propositalmente transparente para fins acadêmicos. Para a entrega
 final, ele deve ser substituído ou comparado com um pipeline NER/RE baseado no
 domínio escolhido pelo grupo e validado com métricas e testes.
