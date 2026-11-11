@@ -1,0 +1,5 @@
+# O workspace contém outros projetos e ferramentas; publique apenas este projeto.
+*
+!.gitignore
+!README.md
+!PROJETO RICARDO.py
