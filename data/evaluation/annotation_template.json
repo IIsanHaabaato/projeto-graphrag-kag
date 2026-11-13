@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "annotation_status": "pending_human_annotation",
+  "document_id": null,
+  "filename": null,
+  "page_number": null,
+  "page_text_sha256": null,
+  "entities": [],
+  "relationships": [],
+  "reviewer_notes": ""
+}

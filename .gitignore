@@ -4,3 +4,26 @@
 !README.md
 !PROJETO RICARDO.py
 !test_projeto_ricardo.py
+!requirements.txt
+!sources.csv
+!src/
+!src/ingestion/
+!src/ingestion/*.py
+!src/extraction/
+!src/extraction/*.py
+!src/knowledge/
+!src/knowledge/*.py
+!src/evaluation/
+!src/evaluation/*.py
+!src/config.py
+!tests/
+!tests/*.py
+!neo4j/
+!neo4j/*.cypher
+!.env.example
+!data/
+data/raw/
+!data/processed/
+!data/processed/*.jsonl
+!data/evaluation/
+!data/evaluation/*.json

@@ -1,0 +1,6 @@
+document_id,title,institution,category,url,publication_date,collection_date,language,filename,source_path,ingestion_status,include_in_pipeline,review_reason
+nasa-179225main-iss-poster-back,179225main_iss_poster_back.pdf,,,,,,,179225main_iss_poster_back.pdf,NASA/179225main_iss_poster_back.pdf,processed,false,Rejeitado: pôster sem texto extraível e fora do recorte de fontes textuais.
+nasa-doc001-artemis-i,,,,,,,,DOC001_artemis_i.pdf,NASA/DOC001_artemis_i.pdf,processed,true,Aprovado: documento sobre a missão Artemis I.
+nasa-doc005-perseverance,,,,,,,,DOC005_perseverance.pdf,NASA/DOC005_perseverance.pdf,processed,true,Aprovado: documento sobre Mars 2020 Perseverance.
+nasa-orion,,,,,,,,orion.pdf,NASA/orion.pdf,processed,true,Aprovado provisoriamente: confirmar a identidade e a aderência do conteúdo de orion.pdf.
+nasa-preparation-of-papers-for-aiaa-technical-conferences,Preparation of Papers for AIAA Technical Conferences,,,,,,,Preparation of Papers for AIAA Technical Conferences.pdf,NASA/Preparation of Papers for AIAA Technical Conferences.pdf,processed,false,Rejeitado: modelo de formatação acadêmica, não fonte de operações espaciais.
